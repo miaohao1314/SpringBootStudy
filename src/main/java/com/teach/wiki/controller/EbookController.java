@@ -1,7 +1,10 @@
 package com.teach.wiki.controller;
 
 
+import com.teach.wiki.Req.EbookReq;
+import com.teach.wiki.Resp.EbookResp;
 import com.teach.wiki.domain.Ebook;
+import com.teach.wiki.Resp.IMOOCJSONResult;
 import com.teach.wiki.service.EbookService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +21,9 @@ public class EbookController {
     private EbookService ebookService;
 
     @GetMapping("/getEbookList")
-    public List<Ebook> getEbookList(){
-        return  ebookService.getEbook();
-    }
+    public IMOOCJSONResult getEbookList(EbookReq ebookReq){
+        List<EbookResp> ebook = ebookService.getEbook(ebookReq);
+        return  IMOOCJSONResult.ok(ebook);
 
+    }
 }
