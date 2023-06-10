@@ -1,15 +1,21 @@
 package com.teach.wiki.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.teach.wiki.domain.Test;
+import com.teach.wiki.service.TestService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 // ctrl+alt+o
 
 @RestController
 @RequestMapping("hello")
 public class TestController {
+
+
+    @Resource
+   private   TestService testService;
 
     // restful风格
 //    @RequestMapping(path="/first",method = RequestMethod.POST)
@@ -18,4 +24,9 @@ public class TestController {
         return "这是我用idea进行的第一次提交";
     }
 
+    @GetMapping("/list")
+    public List<Test> getList(){
+        List<Test> list = testService.getList();
+        return list;
+    }
 }
